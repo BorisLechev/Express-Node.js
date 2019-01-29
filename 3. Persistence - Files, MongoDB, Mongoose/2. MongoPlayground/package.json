@@ -1,0 +1,19 @@
+{
+  "name": "2.-mongoplayground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "1.2.1",
+    "mongodb": "3.1.13",
+    "mongoose": "5.4.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
