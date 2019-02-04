@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const carShema = new Schema({
-    model: {                          // check names of the fields in .hbs files
+    model: { // check names of the fields in .hbs files
         type: Schema.Types.String,
         required: true
     },
