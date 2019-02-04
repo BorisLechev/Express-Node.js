@@ -11,9 +11,9 @@ const rentSchema = new Schema({
         required: true,
         ref: "Car"
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        required: true,
+    user: {                         // with User.js rents to know the user who rented the car
+        type: Schema.Types.ObjectId, // double connection REMEMBER One teacher -> many students
+        required: true,               // one student -> many teachers
         ref: "User"
     }
 });

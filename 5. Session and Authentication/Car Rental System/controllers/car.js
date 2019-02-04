@@ -53,6 +53,8 @@ module.exports = {
             const carById = await Car.findById(car);
             carById.isRented = true;
             await carById.save(); // can work without await also
+            req.user.rents.push(rent._id); // rented cars push in array check User.js "rents":[...]
+            await req.user.save(); // save rents in the array
             res.redirect("/car/all");
         } catch (err) {
             console.log(err);
@@ -90,19 +92,22 @@ module.exports = {
     },
     editPost: (req, res) => {
         const carId = req.params.id;
-        let car = req.body;
+        const {
+            model,
+            imageUrl,
+            pricePerDay
+        } = req.body;
 
         Car.findById(carId)
             .then((oldCar) => {
-                oldCar.model = car.model;
-                oldCar.imageUrl = car.imageUrl;
-                oldCar.pricePerDay = +car.pricePerDay;
+                oldCar.model = model;
+                oldCar.imageUrl = imageUrl;
+                oldCar.pricePerDay = +pricePerDay;
 
-                oldCar.save()
-                    .then(() => {
-                        res.redirect("/car/all");
-                    })
-                    .catch(console.error);
+                return oldCar.save();
+            })
+            .then(() => {
+                res.redirect("/car/all");
             })
             .catch(console.error);
     }

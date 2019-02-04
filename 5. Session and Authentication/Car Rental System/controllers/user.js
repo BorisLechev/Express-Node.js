@@ -1,6 +1,7 @@
 const encryption = require("../util/encryption"); // for salt
 const User = require("../models/User"); // UserSchema
 const Rent = require("../models/Rent");
+const Car = require("../models/Car");
 
 module.exports = {
     registerGet: (req, res) => {
@@ -89,12 +90,19 @@ module.exports = {
     myRents: (req, res) => {
         const userId = req.user._id;
 
-        Rent.find({
+        Rent.find({ // find because it returns many IN RENTS (db collection) we store only id but we need the car data  (all rented cars that has the user)
                 user: userId
             })
-            .populate("car")  // will take all data about car not only the id
-            .then((cars) => {
-                res.render("user/rents", {
+            .populate("car") // will take all data about car (property in Rent.js) not only the id
+            .then((rents) => { // we have connection -> car:... in Rent.js
+                let cars = [];
+
+                rents.forEach(function (rent) { // changed in rented.hbs car with this and we need context
+                    rent.car.expiresOn = `In ${rent.days} days.`; // expiresOn from rented.hbs
+                    cars.push(rent.car);
+                });
+
+                res.render("user/rented", {
                     cars
                 });
             })

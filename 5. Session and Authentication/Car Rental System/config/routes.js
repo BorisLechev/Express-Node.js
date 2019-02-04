@@ -10,7 +10,7 @@ module.exports = app => {
     app.get("/user/login", restrictedPages.isAnonymous, userController.loginGet);
     app.post("/user/login", restrictedPages.isAnonymous, userController.loginPost);
     app.post("/user/logout", userController.logout);
-    app.get("/user/rents/:id", restrictedPages.isAuthed, userController.myRents); // only for registered users
+    app.get("/user/rents", restrictedPages.isAuthed, userController.myRents); // only for registered users
 
     app.get("/car/add", restrictedPages.hasRole("Admin"), carController.addGet); // block path for admins
     app.post("/car/add", restrictedPages.hasRole("Admin"), carController.addPost);

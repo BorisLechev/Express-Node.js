@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     },
     roles: [{
         type: mongoose.Schema.Types.String
+    }],
+    rents:[{                             /// array of rented cars id's added for the table My Rented Cars
+        type:mongoose.Schema.Types.ObjectId, // double connection REMEMBER One teacher -> many students
+        ref:"Rent"                            // one student -> many teachers
     }]
 });
 
