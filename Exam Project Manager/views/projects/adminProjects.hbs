@@ -1,0 +1,23 @@
+<h1>Projects</h1>
+<h3>Manage Teams</h3>
+<div class="form">
+    <form action="/projects/adminProjects" method="POST">
+        <label>Team</label>
+        <select name="teamId">
+
+            {{#each teamsArray}}
+            <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+
+        </select>
+        <label>Project</label>
+        <select name="projectId">
+
+            {{#each projectsArray}}
+            <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+
+        </select>
+        <input type="submit" value="Distribute">
+    </form>
+</div>
